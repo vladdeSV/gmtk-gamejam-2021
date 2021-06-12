@@ -17,4 +17,4 @@ if(rotate_speed >= 399 && alarm[0] == -1) {
 }
 
 sprite_index = (rotate_speed > 360 ? spr_passage_open : spr_passage)
-image_angle += (rotate_speed)/room_speed
+image_angle -= (rotate_speed)/room_speed

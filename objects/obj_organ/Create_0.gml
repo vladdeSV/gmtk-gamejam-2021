@@ -53,7 +53,8 @@ update = function() {
     var standing_on_organ = instance_place(x,y+1, obj_organ)
     var standing_on_eye = standing_on_organ != noone && standing_on_organ.object_index == obj_eye
     
-    if(standing && !on_organ_mid_air && !jumping && keyboard_check(key_up)) {
+    var just_threw = alarm[7] >= 0
+    if(standing && !active && !on_organ_mid_air && !jumping && !just_threw && keyboard_check(key_up)) {
         vy -= jump_velocity * (standing_on_eye ? 0.5 : 1)
         jumping = true
     }
@@ -66,7 +67,6 @@ update = function() {
     if(low_air_friction) {
         friction_modifier = (standing_on_organ && abs(standing_on_organ.vx) > 0.1) || !standing ? 1 : 0.2
     }
-    
     
     var colliding_bottom_right = position_meeting(bbox_right - 8, bbox_bottom + 1, obj_block)
     var colliding_bottom_left = position_meeting(bbox_left + 8, bbox_bottom + 1, obj_block)
@@ -153,7 +153,7 @@ entity_collision = function(){
                             other.vy -= 5
                             vx = (vx > 0 ? -1 : 1) * 3
                             vy = -2
-                            alarm[5] = room_speed / 3
+                            alarm[7] = room_speed / 3
                             other.alarm[5] = room_speed / 2
                         }
                     }

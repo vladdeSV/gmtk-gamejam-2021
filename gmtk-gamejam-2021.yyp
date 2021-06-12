@@ -87,9 +87,9 @@
     {"roomId":{"name":"room_separate","path":"rooms/room_separate/room_separate.yy",},},
     {"roomId":{"name":"room_throwy","path":"rooms/room_throwy/room_throwy.yy",},},
     {"roomId":{"name":"room_platform","path":"rooms/room_platform/room_platform.yy",},},
+    {"roomId":{"name":"room_ch1_introduction","path":"rooms/room_ch1_introduction/room_ch1_introduction.yy",},},
     {"roomId":{"name":"room_pikyness","path":"rooms/room_pikyness/room_pikyness.yy",},},
     {"roomId":{"name":"room_test_plaform","path":"rooms/room_test_plaform/room_test_plaform.yy",},},
-    {"roomId":{"name":"room_ch1_introduction","path":"rooms/room_ch1_introduction/room_ch1_introduction.yy",},},
   ],
   "Folders": [
     {"folderPath":"folders/Sprites.yy","order":1,"resourceVersion":"1.0","name":"Sprites","tags":[],"resourceType":"GMFolder",},
