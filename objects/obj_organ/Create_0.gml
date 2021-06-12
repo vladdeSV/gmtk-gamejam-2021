@@ -36,7 +36,7 @@ update = function() {
     entity_collision()
     
     sprite_index = active ? sprite_active : sprite_default
-    next_tick_active = keyboard_check(key_down)
+    next_tick_active = obj_game.can_activate && keyboard_check(key_down)
     
     // gravity
     var downforce = 0.48
@@ -90,8 +90,6 @@ update = function() {
             standing_on_organ.x - x,
             standing_on_organ.y - y
         )
-        
-        show_debug_message("on eye")
         
         vx += (rad < 0 ? 1 : -1)
     }

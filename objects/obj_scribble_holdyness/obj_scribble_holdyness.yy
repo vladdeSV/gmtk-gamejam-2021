@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "spr_scribble_lunge",
-    "path": "sprites/spr_scribble_lunge/spr_scribble_lunge.yy",
+    "name": "spr_scribble_holdyness",
+    "path": "sprites/spr_scribble_holdyness/spr_scribble_holdyness.yy",
   },
   "solid": false,
   "visible": true,
@@ -31,7 +31,7 @@
     "path": "folders/Objects/scribbles.yy",
   },
   "resourceVersion": "1.0",
-  "name": "obj_scribble_lunge",
+  "name": "obj_scribble_holdyness",
   "tags": [],
   "resourceType": "GMObject",
 }
