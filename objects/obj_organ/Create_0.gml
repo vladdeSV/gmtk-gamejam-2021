@@ -1,5 +1,5 @@
-vx = 0
-vy = 0
+vx = 0.11
+vy = 0.11
 collision = Direction.none
 jumping = false
 on_organ_mid_air = false
@@ -26,6 +26,11 @@ update = function() {
     if(place_meeting(x, y, obj_tooth)) {
         // fixme
         room_restart()
+    }
+    
+    if(alarm[10] >= 0) {
+        var percent = alarm[10] / (room_speed / 2)
+        image_alpha = 1 - 0.5 * percent
     }
     
     entity_collision()
@@ -126,7 +131,7 @@ entity_collision = function(){
             if(object_is_ancestor(collidingVerticalId.object_index, obj_organ)) {
                 with(collidingVerticalId) {
                     other.on_organ_mid_air = !place_meeting(x,y+1, obj_block)
-                    if(object_index == obj_hand && other.alarm[5] == -1)
+                    if(object_index == obj_hand && other.alarm[5] == -1 && keyboard_check(key_up))
                     {
                         if(abs(vx) > 0.1) {
                             other.vx += vx*3

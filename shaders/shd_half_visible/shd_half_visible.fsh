@@ -23,8 +23,9 @@ void main()
     float center_distance = abs(distance(vec2(x,y), vec2(nearest.x, nearest.y)));
     float center_distance_percentage = center_distance / camera_size;
     float distance_alpha = 1.6 - 4.0 * center_distance_percentage;
-    if (distance_alpha < 0.1) {
-        distance_alpha = (0.25 + alpha_delta) - 0.4 * center_distance_percentage;
+    float distance_alpha_2 = (0.25 + alpha_delta) - 0.4 * center_distance_percentage;
+    if (distance_alpha_2 > distance_alpha) {
+        distance_alpha = distance_alpha_2;
     }
     
     float alpha = 1.0;

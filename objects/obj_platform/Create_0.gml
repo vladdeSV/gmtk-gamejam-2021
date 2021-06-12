@@ -1,6 +1,10 @@
 event_inherited()
 
-active = false
+platform_id = undefined
+active_count = 0
+
+_position = create_temporal_container(0)
+_position.duration = room_speed * 1
 
 _initial_position = {
     x: x,

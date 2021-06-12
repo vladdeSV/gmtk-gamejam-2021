@@ -9,7 +9,7 @@ if(instance_number(obj_organ) < 2) {
     collisions *= 2
 }
 
-rotate_speed += power(10, collisions)
+rotate_speed += power(5, collisions)
 rotate_speed *= 0.95
 
 if(rotate_speed >= 399 && alarm[0] == -1) {
