@@ -4,6 +4,8 @@ collision = Direction.none
 jumping = false
 on_organ_mid_air = false
 
+jump_velocity = 9.1
+
 key_up = vk_up
 key_down = vk_down
 key_left = vk_left
@@ -21,6 +23,13 @@ update = function() {
     }
     
     
+    if(place_meeting(x, y, obj_tooth)) {
+        // fixme
+        room_restart()
+    }
+    
+    entity_collision()
+    
     sprite_index = active ? sprite_active : sprite_default
     next_tick_active = keyboard_check(key_down)
     
@@ -28,23 +37,30 @@ update = function() {
     var downforce = 0.48
     vy += downforce
     
-    var jumpHeight = 9.1
     if (keyboard_check_released(key_up)) {
         jumping = false
     }
     
     var standing = collision & Direction.down
-    var standing_on_eye = instance_place(x,y+1, obj_eye)
+    var standing_on_organ = instance_place(x,y+1, obj_organ)
+    var standing_on_eye = standing_on_organ != noone && standing_on_organ.object_index == obj_eye
     
     if(standing && !on_organ_mid_air && !jumping && keyboard_check(key_up)) {
-        vy -= jumpHeight * (standing_on_eye != noone ? 0.5 : 1)
+        vy -= jump_velocity * (standing_on_eye ? 0.5 : 1)
         jumping = true
     }
 
     var sx = keyboard_check(key_right) - keyboard_check(key_left)
+    var staggered = object_index == obj_hand && alarm[5] > 0
+    var friction_modifier = 0.8
+    var low_air_friction = alarm[5] >= 0
     
-    if (active || sx == 0) {
-        vx *= 0.8
+    if(low_air_friction) {
+        friction_modifier = (standing_on_organ && abs(standing_on_organ.vx) > 0.1) || !standing ? 1 : 0.2
+    }
+   
+    if (active || sx == 0 || staggered) {
+        vx *= friction_modifier
         if(abs(vx) < 0.01) {
             vx = 0
         }
@@ -64,17 +80,16 @@ update = function() {
     }
     
     
-    if(standing_on_eye != noone) {
+    if(standing_on_eye) {
         var rad = arctan2(
-            standing_on_eye.x - x,
-            standing_on_eye.y - y
+            standing_on_organ.x - x,
+            standing_on_organ.y - y
         )
         
-        vx += 0.5 * (rad < 0 ? 1 : -1)
+        show_debug_message("on eye")
+        
+        vx += (rad < 0 ? 1 : -1)
     }
-    
-    entity_collision()
-
 }
 
 entity_collision = function(){
@@ -84,7 +99,7 @@ entity_collision = function(){
         collidingVerticalId = instance_place(x, y + vy, obj_organ)
     }
     
-    var on_organ_mid_air = false;
+    other.on_organ_mid_air = false
     
     if(collidingVerticalId == noone) {
         collision = collision & ~(Direction.up | Direction.down)
@@ -111,6 +126,17 @@ entity_collision = function(){
             if(object_is_ancestor(collidingVerticalId.object_index, obj_organ)) {
                 with(collidingVerticalId) {
                     other.on_organ_mid_air = !place_meeting(x,y+1, obj_block)
+                    if(object_index == obj_hand && other.alarm[5] == -1)
+                    {
+                        if(abs(vx) > 0.1) {
+                            other.vx += vx*3
+                            other.vy -= 5
+                            vx = (vx > 0 ? -1 : 1) * 3
+                            vy = -2
+                            alarm[5] = room_speed / 3
+                            other.alarm[5] = room_speed / 2
+                        }
+                    }
                 }
             }
         }

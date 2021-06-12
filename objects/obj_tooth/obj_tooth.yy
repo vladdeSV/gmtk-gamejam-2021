@@ -31,7 +31,7 @@
     "path": "folders/Objects/world.yy",
   },
   "resourceVersion": "1.0",
-  "name": "obj_spike",
+  "name": "obj_tooth",
   "tags": [],
   "resourceType": "GMObject",
 }

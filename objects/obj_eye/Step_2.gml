@@ -1,0 +1,1 @@
+obj_game.alpha_delta = active ? 0.6 : 0

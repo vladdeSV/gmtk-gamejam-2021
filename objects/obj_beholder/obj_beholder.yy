@@ -1,16 +1,13 @@
 {
   "spriteId": {
-    "name": "spr_hand",
-    "path": "sprites/spr_hand/spr_hand.yy",
+    "name": "spr_beholder",
+    "path": "sprites/spr_beholder/spr_beholder.yy",
   },
   "solid": false,
   "visible": true,
   "spriteMaskId": null,
   "persistent": false,
-  "parentObjectId": {
-    "name": "obj_organ",
-    "path": "objects/obj_organ/obj_organ.yy",
-  },
+  "parentObjectId": null,
   "physicsObject": false,
   "physicsSensor": false,
   "physicsShape": 1,
@@ -23,18 +20,15 @@
   "physicsStartAwake": true,
   "physicsKinematic": false,
   "physicsShapePoints": [],
-  "eventList": [
-    {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
-    {"isDnD":false,"eventNum":5,"eventType":2,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
-  ],
+  "eventList": [],
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "organs",
-    "path": "folders/Objects/organs.yy",
+    "name": "menu",
+    "path": "folders/Objects/menu.yy",
   },
   "resourceVersion": "1.0",
-  "name": "obj_hand",
+  "name": "obj_beholder",
   "tags": [],
   "resourceType": "GMObject",
 }

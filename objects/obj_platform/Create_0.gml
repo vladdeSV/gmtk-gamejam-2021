@@ -1,13 +1,13 @@
 event_inherited()
 
-active = true
+active = false
 
-initial_position = {
+_initial_position = {
     x: x,
     y: y,
 }
 
 delta_position = {
-    x: -(sprite_width * 4),
-    y: sprite_height * 4,
+    x: 0,
+    y: 0,
 }

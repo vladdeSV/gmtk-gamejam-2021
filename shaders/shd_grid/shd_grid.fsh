@@ -8,6 +8,7 @@ varying vec2 v_vPosition;
 uniform vec2 nearest;
 uniform float camera_size;
 uniform float time;
+uniform float alpha_delta; // used to increase m (in "kx+m") in distance to nearest light
 
 bool halfmod(float val, float repeat) {
     bool is_half = mod(val, repeat) < (repeat / 2.0);
@@ -31,7 +32,7 @@ void main()
     // distance from center
     float center_distance = abs(distance(vec2(x,y) + vec2(time, time), vec2(nearest.x, nearest.y)));
     float center_distance_percentage = center_distance / camera_size;
-    float distance_alpha = 1.6 - 4.0 * center_distance_percentage;
+    float distance_alpha = (1.6 + alpha_delta) - 4.0 * center_distance_percentage;
     // distance_alpha -= mod(distance_alpha, 0.3); // makes alpha step every 30%
 
     // checker
