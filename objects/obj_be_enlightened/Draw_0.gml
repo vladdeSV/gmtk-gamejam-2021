@@ -1,3 +1,5 @@
 shader_set(shd_blessed_shine)
+var time_index = shader_get_uniform(shd_blessed_shine, "time")
+shader_set_uniform_f(time_index, game_get_tick())
 draw_self()
 shader_reset()
