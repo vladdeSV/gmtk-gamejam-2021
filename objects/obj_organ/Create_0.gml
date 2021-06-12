@@ -16,22 +16,25 @@ next_tick_active = false
 sprite_default = spr_error
 sprite_active = spr_error
 
+is_dead = function() {
+    return alarm[6] >= 0
+}
+
 update = function() {
     
-    if(x < 0 || y < 0 || x > room_width || y > room_height) {
-        room_restart()
+    if(obj_game.time_frozen) {
+        return
     }
     
-    
-    if(place_meeting(x, y, obj_tooth)) {
-        // fixme
-        room_restart()
+    if(x < 0 || y < 0 || x > room_width || y > room_height || place_meeting(x, y, obj_tooth)) {
+        death(self)
     }
-    
-    if(alarm[10] >= 0) {
+
+    // fixme, flash when cannot activate
+    /*if(alarm[10] >= 0) {
         var percent = alarm[10] / (room_speed / 2)
         image_alpha = 1 - 0.5 * percent
-    }
+    }*/
     
     entity_collision()
     
@@ -63,7 +66,21 @@ update = function() {
     if(low_air_friction) {
         friction_modifier = (standing_on_organ && abs(standing_on_organ.vx) > 0.1) || !standing ? 1 : 0.2
     }
-   
+    
+    
+    var colliding_bottom_right = position_meeting(bbox_right - 8, bbox_bottom + 1, obj_block)
+    var colliding_bottom_left = position_meeting(bbox_left + 8, bbox_bottom + 1, obj_block)
+    
+    if(colliding_bottom_right || colliding_bottom_left) {
+        if(!colliding_bottom_right) {
+            friction_modifier *= 0.25
+        }
+        
+        if(!colliding_bottom_left) {
+            friction_modifier *= 0.25
+        }
+    }
+    
     if (active || sx == 0 || staggered) {
         vx *= friction_modifier
         if(abs(vx) < 0.01) {

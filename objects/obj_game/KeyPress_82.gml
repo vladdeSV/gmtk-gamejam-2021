@@ -1,2 +1,2 @@
-/// @description Restart room
-room_restart()
+/// @description Room restart
+restart()

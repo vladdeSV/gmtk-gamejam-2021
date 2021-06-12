@@ -21,3 +21,13 @@ function create_temporal_container(initial) {
 function game_get_tick() {
     return obj_game.tick
 }
+
+function death(instance) {
+    obj_game.time_frozen = true
+    instance.alarm[6] = room_speed
+}
+
+function restart() {
+    room_restart()
+    obj_game.time_frozen = false
+}
