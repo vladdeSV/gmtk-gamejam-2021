@@ -1,2 +1,2 @@
-audio_stop_sound(heartbeat_sound)
+//audio_stop_sound(heartbeat_sound)
 next_level()
