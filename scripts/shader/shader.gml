@@ -26,5 +26,10 @@ function shader_custom_init_half() {
 }
 
 function nearest_light() {
+    
+    if (instance_number(obj_organ) == 0) {
+        return [400, 400]
+    }
+    
     return [obj_eye.x, obj_eye.y]
 }
