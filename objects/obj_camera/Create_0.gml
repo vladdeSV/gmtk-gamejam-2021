@@ -7,8 +7,8 @@ set_position = function(position, duration) {
     alarm[CameraAlarm.position] = duration_steps
         
     _position.duration_steps = duration_steps
-    _position.start_position = self._position.current_position
-    _position.end_position = position
+    _position.from = self._position.current
+    _position.to = position
 }
 
 get_size = function() {

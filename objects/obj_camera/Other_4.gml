@@ -1,6 +1,10 @@
 var organ_count = instance_number(obj_organ)
 var tx = 0, ty = 0
 
+if(organ_count == 0) {
+    return {x: room_width/2, y: 0}
+}
+
 with(obj_organ) {
     tx += x
     ty += y

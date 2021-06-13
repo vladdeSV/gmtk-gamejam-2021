@@ -29,6 +29,8 @@ function death(instance) {
 
 function restart() {
     
+    static_screen(0.18)
+    
     obj_game.time_frozen = false
     
     var checkpoint = undefined
@@ -54,11 +56,20 @@ function restart() {
         x = checkpoint.x + w * d
         i++
     }
-    
 }
 
 function next_level() {
     room_goto_next()
-    obj_game.alarm[11] = room_speed / 4
+    static_screen(0.25)
+}
+
+function static_screen(duration) {
+    var dur = seconds_in_steps(duration)
+    obj_game.alarm[11] = dur
+    
+    if(obj_game.sound_static != undefined) {
+        audio_stop_sound(obj_game.sound_static)
+    }
+    
     obj_game.sound_static = audio_play_sound(snd_noise, 1, false)
 }

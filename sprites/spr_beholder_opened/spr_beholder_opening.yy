@@ -47,7 +47,7 @@
     "spriteId": {"name":"spr_beholder_opening","path":"sprites/spr_beholder_opening/spr_beholder_opening.yy",},
     "timeUnits": 1,
     "playback": 1,
-    "playbackSpeed": 18.0,
+    "playbackSpeed": 12.0,
     "playbackSpeedType": 0,
     "autoRecord": true,
     "volume": 1.0,

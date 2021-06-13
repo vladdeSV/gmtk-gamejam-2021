@@ -32,4 +32,25 @@ function nearest_light() {
     }
     
     return [obj_eye.x, obj_eye.y]
+    
+    /*
+    var temp_min_dist = undefined
+    var closest_lightsource_instance = undefined
+    
+    
+    // wtf duplicate code in my project?!?!
+    with(obj_eye) {
+        var dist = distance_to_object(other)
+        if(temp_min_dist == undefined || dist < temp_min_dist) {
+            closest_lightsource_instance = self
+            temp_min_dist = dist
+        }
+    }
+    
+    var cx = closest_lightsource_instance.x
+    var cy = closest_lightsource_instance.y
+    
+    return [cx, cy]
+    */
 }
+

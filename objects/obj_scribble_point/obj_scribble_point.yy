@@ -28,7 +28,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "scribbles",
-    "path": "folders/Objects/scribbles.yy",
+    "path": "folders/Objects/world/scribbles.yy",
   },
   "resourceVersion": "1.0",
   "name": "obj_scribble_point",

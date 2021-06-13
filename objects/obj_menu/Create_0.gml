@@ -1,0 +1,1 @@
+heartbeat_sound = audio_play_sound(snd_heartbeat, 1, true)
