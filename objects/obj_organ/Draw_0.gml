@@ -7,5 +7,11 @@ if(is_dead()) {
 }
 
 shader_custom_init_half()
+
+var custom_alpha_delta_delta_index = shader_get_uniform(shd_half_visible, "custom_alpha_delta")
+shader_set_uniform_f(custom_alpha_delta_delta_index, custom_alpha_delta)
+
 draw_self()
+
+shader_set_uniform_f(custom_alpha_delta_delta_index, 0)
 shader_reset()

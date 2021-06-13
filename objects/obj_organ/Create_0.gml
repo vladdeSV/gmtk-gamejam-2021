@@ -5,6 +5,7 @@ jumping = false
 on_organ_mid_air = false
 
 jump_velocity = 9.1
+custom_alpha_delta = 0
 
 key_up = vk_up
 key_down = vk_down
@@ -38,6 +39,14 @@ update = function() {
         image_alpha = 1 - 0.5 * percent
     }*/
     
+    if(alarm[10] >= 0) {
+        var percent = alarm[10] / (room_speed / 2)
+        custom_alpha_delta = -(1 * percent)
+    } else {
+        custom_alpha_delta = 0
+    }
+
+    
     entity_collision()
     
     sprite_index = active ? sprite_active : sprite_default
@@ -68,13 +77,14 @@ update = function() {
     var friction_modifier = 0.8
     
     if (low_air_friction) {
-        friction_modifier = (standing_on_organ && abs(standing_on_organ.vx) > 0.1) || !standing ? 1 : 0.2
+        var is_eye_being_thrown = (object_index == obj_eye && alarm[5] >= 0)
+        friction_modifier = (standing_on_organ && abs(standing_on_organ.vx) > 0.1) || !standing || is_eye_being_thrown ? 1 : 0.2
     }
     
     var colliding_bottom_right = position_meeting(bbox_right - 8, bbox_bottom + 1, obj_block)
     var colliding_bottom_left = position_meeting(bbox_left + 8, bbox_bottom + 1, obj_block)
     
-    if (colliding_bottom_right || colliding_bottom_left) {
+    if ((colliding_bottom_right || colliding_bottom_left)) {
         if (!colliding_bottom_right) {
             friction_modifier *= 0.25
         }

@@ -17,12 +17,11 @@ function shader_custom_init_half() {
     
     var nearest_index = shader_get_uniform(shd_half_visible, "nearest")
     var camera_size_index = shader_get_uniform(shd_half_visible, "camera_size")
-    var alpha_delta_index = shader_get_uniform(shd_grid, "alpha_delta")
+    var alpha_delta_index = shader_get_uniform(shd_half_visible, "alpha_delta")
 
     shader_set_uniform_f_array(nearest_index, nearest_light())
     shader_set_uniform_f(camera_size_index, obj_camera.get_size())
     shader_set_uniform_f(alpha_delta_index, obj_game.alpha_delta)
-
 }
 
 function nearest_light() {

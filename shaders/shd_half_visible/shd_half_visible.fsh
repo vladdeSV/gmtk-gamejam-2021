@@ -8,6 +8,7 @@ varying vec2 v_vPosition;
 uniform vec2 nearest;
 uniform float camera_size;
 uniform float alpha_delta; // used to increase m (in "kx+m") in distance to nearest light
+uniform float custom_alpha_delta;
 
 void main()
 {
@@ -30,6 +31,7 @@ void main()
     
     float alpha = 1.0;
     alpha *= distance_alpha;
+    alpha += custom_alpha_delta;
     
     gl_FragColor = texture2D(gm_BaseTexture, v_vTexcoord);
     gl_FragColor *= vec4(1.0, 1.0, 1.0, alpha);

@@ -1,6 +1,6 @@
 tick++
 
-/*
+/* allow debug shortcuts
 if(keyboard_check_pressed(ord("Q"))) {
     room_goto_previous()
 } else if (keyboard_check_pressed(ord("E"))) {
