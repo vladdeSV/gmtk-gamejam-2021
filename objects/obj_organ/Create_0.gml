@@ -16,17 +16,19 @@ next_tick_active = false
 sprite_default = spr_error
 sprite_active = spr_error
 
+cannonical_name = undefined
+
 is_dead = function() {
     return alarm[6] >= 0
 }
 
 update = function() {
     
-    if(obj_game.time_frozen) {
+    if (obj_game.time_frozen) {
         return
     }
     
-    if(x < 0 || y < 0 || x > room_width || y > room_height || place_meeting(x, y, obj_tooth)) {
+    if (x < 0 || y < 0 || x > room_width || y > room_height || place_meeting(x, y, obj_tooth)) {
         death(self)
     }
 
@@ -53,8 +55,10 @@ update = function() {
     var standing_on_organ = instance_place(x,y+1, obj_organ)
     var standing_on_eye = standing_on_organ != noone && standing_on_organ.object_index == obj_eye
     
+    var low_air_friction = alarm[5] >= 0
+    
     var just_threw = alarm[7] >= 0
-    if(standing && !active && !on_organ_mid_air && !jumping && !just_threw && keyboard_check(key_up)) {
+    if (standing && !active && !on_organ_mid_air && !jumping && !low_air_friction && !just_threw && keyboard_check(key_up)) {
         vy -= jump_velocity * (standing_on_eye ? 0.5 : 1)
         jumping = true
     }
@@ -62,26 +66,25 @@ update = function() {
     var sx = keyboard_check(key_right) - keyboard_check(key_left)
     var staggered = object_index == obj_hand && alarm[5] > 0
     var friction_modifier = 0.8
-    var low_air_friction = alarm[5] >= 0
     
-    if(low_air_friction) {
+    if (low_air_friction) {
         friction_modifier = (standing_on_organ && abs(standing_on_organ.vx) > 0.1) || !standing ? 1 : 0.2
     }
     
     var colliding_bottom_right = position_meeting(bbox_right - 8, bbox_bottom + 1, obj_block)
     var colliding_bottom_left = position_meeting(bbox_left + 8, bbox_bottom + 1, obj_block)
     
-    if(colliding_bottom_right || colliding_bottom_left) {
-        if(!colliding_bottom_right) {
+    if (colliding_bottom_right || colliding_bottom_left) {
+        if (!colliding_bottom_right) {
             friction_modifier *= 0.25
         }
         
-        if(!colliding_bottom_left) {
+        if (!colliding_bottom_left) {
             friction_modifier *= 0.25
         }
     }
     
-    if (active || sx == 0 || staggered) {
+    if (active || just_threw || sx == 0 || staggered) {
         vx *= friction_modifier
         if(abs(vx) < 0.01) {
             vx = 0
@@ -101,8 +104,7 @@ update = function() {
         }
     }
     
-    
-    if(standing_on_eye) {
+    if (standing_on_eye) {
         var rad = arctan2(
             standing_on_organ.x - x,
             standing_on_organ.y - y
@@ -145,16 +147,16 @@ entity_collision = function(){
             
             if(object_is_ancestor(collidingVerticalId.object_index, obj_organ)) {
                 with(collidingVerticalId) {
-                    other.on_organ_mid_air = !place_meeting(x,y+1, obj_block)
-                    if(object_index == obj_hand && other.alarm[5] == -1 && keyboard_check(key_up))
+                    other.on_organ_mid_air = !place_meeting(x, y + 1, obj_block)
+                    if(object_index == obj_hand && other.alarm[5] == -1 && keyboard_check(key_up) && place_meeting(x, y + 1, obj_block))
                     {
                         if(abs(vx) > 0.1) {
-                            other.vx += vx*3
+                            other.vx += vx * 3
                             other.vy -= 5
                             vx = (vx > 0 ? -1 : 1) * 3
                             vy = -2
-                            alarm[7] = room_speed / 3
-                            other.alarm[5] = room_speed / 2
+                            alarm[7] = room_speed * 0.7
+                            other.alarm[5] = room_speed / 3
                         }
                     }
                 }
@@ -163,11 +165,11 @@ entity_collision = function(){
     }
 
     var collidingHorizontalId = instance_place(x + vx, y, obj_block)
-    if(collidingHorizontalId == noone) {
+    if (collidingHorizontalId == noone) {
         collidingHorizontalId = instance_place(x + vx, y, obj_organ)
     }
     
-    if(collidingHorizontalId == noone) {
+    if (collidingHorizontalId == noone) {
         collision = collision & ~(Direction.left | Direction.right)
         if (abs(vx) > 0.1) {
             x += vx

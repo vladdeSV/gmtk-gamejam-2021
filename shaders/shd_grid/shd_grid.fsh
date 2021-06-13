@@ -30,7 +30,7 @@ void main()
     float grid_size = 1.3;
     
     // distance from center
-    float center_distance = abs(distance(vec2(x,y) + vec2(time, time), vec2(nearest.x, nearest.y)));
+    float center_distance = abs(distance(vec2(x, y) + vec2(time, time), vec2(nearest.x, nearest.y)));
     float center_distance_percentage = center_distance / camera_size;
     float distance_alpha = (1.6 + alpha_delta) - 4.0 * center_distance_percentage;
     // distance_alpha -= mod(distance_alpha, 0.3); // makes alpha step every 30%

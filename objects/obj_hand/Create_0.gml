@@ -9,3 +9,5 @@ sprite_default = spr_hand
 sprite_active = spr_hand_raised
 
 jump_velocity += 1.2
+
+cannonical_name = "An"

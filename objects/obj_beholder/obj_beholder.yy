@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "spr_beholder",
-    "path": "sprites/spr_beholder/spr_beholder.yy",
+    "name": "spr_beholder_resting",
+    "path": "sprites/spr_beholder_resting/spr_beholder_resting.yy",
   },
   "solid": false,
   "visible": true,
@@ -20,7 +20,9 @@
   "physicsStartAwake": true,
   "physicsKinematic": false,
   "physicsShapePoints": [],
-  "eventList": [],
+  "eventList": [
+    {"isDnD":false,"eventNum":0,"eventType":8,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
+  ],
   "properties": [],
   "overriddenProperties": [],
   "parent": {

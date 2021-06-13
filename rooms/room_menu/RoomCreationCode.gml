@@ -1,2 +1,2 @@
 obj_camera._size.current = 800
-room_goto_next()
+obj_camera._position.current = {x: 0 , y: 0}

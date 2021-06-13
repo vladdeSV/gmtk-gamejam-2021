@@ -1,0 +1,1 @@
+draw_rectangle(x,y, x + 40, y + 40, true)

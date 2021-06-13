@@ -42,8 +42,8 @@
     "PhysicsWorldPixToMetres": 0.1,
   },
   "parent": {
-    "name": "Rooms",
-    "path": "folders/Rooms.yy",
+    "name": "chapter 0",
+    "path": "folders/Rooms/chapter 0.yy",
   },
   "resourceVersion": "1.0",
   "name": "room_setup",
